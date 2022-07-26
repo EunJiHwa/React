@@ -2,9 +2,23 @@ import { useRef, useState, useCallback } from 'react';
 import TodoTemplate from './Components/TodoTemplate';
 import TodoInsert from './Components/TodoInsert';
 import TodoList from './Components/TodoList';
+import userEvent from '../node_modules/@testing-library/user-event/dist/index';
+
+function createBulkTodos() {
+  const array = [];
+  for (let i = 1; i <= 250; i++) {
+    array.push({
+      id: i,
+      text: `할일 ${i}`,
+      checked: false,
+    });
+  }
+  return array;
+}
 
 const App = () => {
-  const [todos, setTodos] = useState([
+  const [todos, setTodos] = useState(createBulkTodos);
+  /* const [todos, setTodos] = useState([
     {
       id: 1,
       text: '리액트의 기초 알아보기',
@@ -20,9 +34,10 @@ const App = () => {
       text: '일정 관리 앱 만들어 보기',
       checked: false,
     },
-  ]);
+  ]);*/
 
-  const nextId = useRef(4);
+  //const nextId = useRef(4);
+  const nextId = useRef(2501);
 
   const onInsert = useCallback(
     (text) => {
